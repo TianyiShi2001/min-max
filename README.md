@@ -51,3 +51,15 @@ fn main() {
     assert!(partial_min.is_nan());
 }
 ```
+
+## What's going on under the hood?
+
+Well, `max!(x1, x2, x3)` expands to:
+
+```rust
+std::cmp::max(x1, std::cmp::max(x2, std::cmp::max(x3)))
+```
+
+and so on. `min!` works similarly, but with `std::cmp::min`.
+
+`min_partial!` and `max_partial` uses the `min` and `max` functions from the [`partial-min-max` crate](https://crates.io/crates/partial-min-max).
