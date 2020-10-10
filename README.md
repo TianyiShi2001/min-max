@@ -1,11 +1,22 @@
 # **min-max**: `max!` and `min!` macros for Rust
 
+[![crates.io](https://img.shields.io/crates/d/min-max.svg)](https://crates.io/crates/min-max)
+[![crates.io](https://img.shields.io/crates/v/min-max.svg)](https://crates.io/crates/min-max)
+[![crates.io](https://img.shields.io/crates/l/min-max.svg)](https://crates.io/crates/min-max)
+
+## Why?
+
+Sometimes you want to find the maximum of a bunch of **scalars**. Usually you would write something like `max(x1, max(x2, max(x3, x4)))`. The `max!` macro provided by this crate simplifies that to `max!(x1, x2, x3, x4)`. (Note, for an **iterable** data structure, you would use `xx.iter().max()`).
+
+## Usage
+
+Add this to your `Cargo.toml`:
+
 ```toml
-[dependencies]
 min-max = "0.1"
 ```
 
-## Usage
+Then, for example:
 
 ```rust
 use min_max::*;
