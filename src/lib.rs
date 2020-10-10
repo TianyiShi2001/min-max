@@ -97,6 +97,26 @@
 //!
 //! `min_partial!` and `max_partial` uses the `min` and `max` functions from the [`partial-min-max` crate](https://crates.io/crates/partial-min-max).
 
+use partial_min_max::{max, min};
+
+#[inline]
+pub fn max_p<T: PartialOrd>(a: T, b: T) -> T {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+#[inline]
+pub fn min_p<T: PartialOrd>(a: T, b: T) -> T {
+    if a < b {
+        a
+    } else {
+        b
+    }
+}
+
 /// Returns the maximum element of the arguments.
 #[macro_export]
 macro_rules! max {
@@ -120,7 +140,7 @@ macro_rules! min {
 macro_rules! max_partial {
     ($x:expr) => ( $x );
     ($x:expr, $($xs:expr),+) => {
-        partial_min_max::max($x, max_partial!( $($xs),+ ))
+        max_p($x, max_partial!( $($xs),+ ))
     };
 }
 
@@ -129,6 +149,6 @@ macro_rules! max_partial {
 macro_rules! min_partial {
     ($x:expr) => ( $x );
     ($x:expr, $($xs:expr),+) => {
-        partial_min_max::min($x, min_partial!( $($xs),+ ))
+        min_p($x, min_partial!( $($xs),+ ))
     };
 }
