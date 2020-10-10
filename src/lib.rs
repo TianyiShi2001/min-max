@@ -63,6 +63,28 @@
 //! }
 //! ```
 //!
+//! ### Can I use custom types?
+//!
+//! Sure, why not?
+//!
+//! ```rust
+//! use min_max::*;
+//!
+//! #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Clone, Copy)]
+//! struct Point {
+//!     x: u16,
+//!     y: u16,
+//! }
+//!
+//! fn main() {
+//!     let a = Point { x: 5, y: 8 };
+//!     let b = Point { x: 10, y: 92 };
+//!     let c = Point { x: 0, y: 3 };
+//!     let max = max!(a, b, c);
+//!     assert_eq!(max, b);
+//! }
+//! ```
+//!
 //! ## What's going on under the hood?
 //!
 //! Well, `max!(x1, x2, x3)` expands to:
@@ -75,6 +97,7 @@
 //!
 //! `min_partial!` and `max_partial` uses the `min` and `max` functions from the [`partial-min-max` crate](https://crates.io/crates/partial-min-max).
 
+/// Returns the maximum element of the arguments.
 #[macro_export]
 macro_rules! max {
     ($x:expr) => ( $x );
@@ -83,6 +106,7 @@ macro_rules! max {
     };
 }
 
+/// Returns the minimum element of the arguments.
 #[macro_export]
 macro_rules! min {
     ($x:expr) => ( $x );
@@ -91,6 +115,7 @@ macro_rules! min {
     };
 }
 
+/// Returns the maximum element of the arguments. Uses [`partial_min_max::max`](https://docs.rs/partial-min-max/0.4.0/partial_min_max/fn.max.html) for comparison.
 #[macro_export]
 macro_rules! max_partial {
     ($x:expr) => ( $x );
@@ -99,6 +124,7 @@ macro_rules! max_partial {
     };
 }
 
+/// Returns the maximum element of the arguments. Uses [`partial_min_max::min`](https://docs.rs/partial-min-max/0.4.0/partial_min_max/fn.min.html) for comparison.
 #[macro_export]
 macro_rules! min_partial {
     ($x:expr) => ( $x );

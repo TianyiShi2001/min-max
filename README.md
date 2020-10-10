@@ -63,6 +63,28 @@ fn main() {
 }
 ```
 
+### Can I use custom types?
+
+Sure, why not?
+
+```rust
+use min_max::*;
+
+#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Clone, Copy)]
+struct Point {
+    x: u16,
+    y: u16,
+}
+
+fn main() {
+    let a = Point { x: 5, y: 8 };
+    let b = Point { x: 10, y: 92 };
+    let c = Point { x: 0, y: 3 };
+    let max = max!(a, b, c);
+    assert_eq!(max, b);
+}
+```
+
 ## What's going on under the hood?
 
 Well, `max!(x1, x2, x3)` expands to:
